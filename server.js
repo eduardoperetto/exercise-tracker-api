@@ -83,7 +83,6 @@ app.get('/api/users/:_id/logs', function(req, res) {
             duration: exercise.duration,
             date: exercise.date.toDateString()
           }));
-        console.log(exercises)
         res.json({
           _id: userFound._id,
           username: userFound.username,
@@ -129,7 +128,7 @@ app.post('/api/users/:_id/exercises', function(req, res) {
   let postedDuration = req.body.duration;
   let postedDate = req.body.date;
   if (postedDate == undefined) {
-    postedDate = new Date(2021, 11, 26);
+    postedDate = new Date();
   }
 
   User.findOne({ _id: postedId }, function(err, userFound) {
@@ -141,7 +140,6 @@ app.post('/api/users/:_id/exercises', function(req, res) {
         });
     }
     else {
-      console.log(new Date(postedDate).toDateString());
       let NewExercise = new Exercise(
         {
           user_id: postedId,
